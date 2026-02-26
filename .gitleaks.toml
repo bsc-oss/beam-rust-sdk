@@ -1,0 +1,18 @@
+[extend]
+# Extend the default config
+useDefault = true
+
+[allowlist]
+# Ignore specific paths (supports regex)
+paths = [
+    '''.*/tests/.*''',
+    '''.*/snapshots/.*''',
+    '''crates/matrix-sdk-crypto/src/secret_storage.rs''',
+]
+
+# Ignore base64-encoded test crypto keys (32-44+ chars of base64)
+# These match the SECRET value, not the surrounding text
+regexes = [
+    # Base64 keys (Curve25519/Ed25519 public keys are 43 chars + optional padding)
+    '''^[A-Za-z0-9+/]{32,}=*$''',
+]
